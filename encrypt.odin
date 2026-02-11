@@ -11,6 +11,13 @@ encrypt :: proc(text: string, offset: i8) -> string
 
     for i := 0; i < len(text); i += 1
     {
+	// Ignore chars that's not a letter
+	if text[i] < 65 || (text[i] > 90 && text[i] < 97) || text[i] > 122
+	{
+	    strings.write_byte(&builder, text[i])
+	    continue
+	}
+
 	// Check if current char is lower or upper case
 	if text[i] >= 65 && text[i] <= 90
 	{
