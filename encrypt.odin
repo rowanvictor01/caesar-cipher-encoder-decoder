@@ -28,7 +28,14 @@ encrypt :: proc(text: string, offset: i8) -> string
 	    base = 97  // ASCII code for 'a'
 	}
 
-        strings.write_byte(&builder, u8((((i8(text[i]) - base) + offset) % 26) + base))
+	/*
+             - We subtract the base to the ascii code of the char to bring it to the 0 - 25 range
+             - Add the shift offset set by the user
+             - Calculate the result of that to % 26 to handle wrapping in the 0 - 25 range
+             - Add 26 to ensure negative values are lifted back to the range
+             - Another % 26 for final wrapping
+	*/
+        strings.write_byte(&builder, u8((((((i8(text[i]) - base) + offset) % 26) + 26) % 26) + base))
     }
     
     return strings.to_string(builder)
