@@ -5,25 +5,41 @@ import "core:fmt"
 
 main :: proc()
 {
-    my_text := "Learn First Lesson In Programming: THE THE FUNDAMENTALS"
-    my_offset: i8 = 83
-    // Encrypt
-    encrypted_str := encrypt(my_text, my_offset)
-    fmt.printf("Before: %s\nAfter: %s\nOffset: %d\n\n", my_text, encrypted_str, my_offset)
-    // Decrypt
-    decrypted_str := encrypt(encrypted_str, -my_offset)
-    fmt.printf("Encrypted: %s\nDecrypted: %s\nOffset: %d\n\n", encrypted_str, decrypted_str, my_offset)
-    
-
-    // START
-    display_menu()
-    input, ok := get_user_selection()
-
-    if !ok
+    input: string
+    for
     {
-	fmt.eprintfln("[ERROR] failed getting valid input\n")
-	return
-    }
+	ok: bool
 
-    fmt.printfln("Your input: %s", input)
+	// Prompt user to make selection
+	display_menu()
+	input, ok = get_user_input("")
+
+	// Check if scan failed
+	if !ok
+	{
+	    continue
+	}
+
+	// Check if input is valid
+	if !is_input_valid(input)
+	{
+	    fmt.printfln("\n[WARNING] Your input (%s) is invalid. Please enter based on given selection!\n", input)
+	    continue
+	}
+
+	// Check if user wants to quit
+	if input == "q"
+	{
+	    break
+	}
+	break
+    }
+    
+    switch input
+    {
+	case "1":
+	    txt, shift := get_text()
+	    encrypted_txt := encrypt(txt, shift)
+	    fmt.printfln("Encrypted Text: %s", encrypted_txt)
+    }
 }
