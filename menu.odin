@@ -81,8 +81,8 @@ get_text :: proc() -> (string, i8)
 	    continue
 	}
 	
-	// Parse string representation of shift value to u64
-        // before casting to u8
+	// Parse string representation of shift value to i64
+        // before casting to i8
 
 	shift, ok = strconv.parse_i64(shift_str)
 	if !ok || shift > 255

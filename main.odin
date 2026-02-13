@@ -41,5 +41,10 @@ main :: proc()
 	    txt, shift := get_text()
 	    encrypted_txt := encrypt(txt, shift)
 	    fmt.printfln("Encrypted Text: %s", encrypted_txt)
+
+	case "2":
+	    txt, shift := get_text()
+	    encrypted_txt := encrypt(txt, -shift)
+	    fmt.printfln("Decrypted Text: %s", encrypted_txt)
     }
 }
