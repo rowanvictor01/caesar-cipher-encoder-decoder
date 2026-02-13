@@ -9,10 +9,11 @@ import "core:strconv"
 
 display_menu :: proc()
 {
-    fmt.println("=====|CAESAR CIPHER PROGRAM|=====\n")
-    fmt.println("[1] ENCRYPT a message")
-    fmt.println("[2] DECRYPT an enrypted message")
-    fmt.println("[3] Quit ('q')")
+    fmt.println("\n=====|CAESAR CIPHER PROGRAM|=====\n")
+    fmt.println("[1] ENCRYPT a Message")
+    fmt.println("[2] DECRYPT a Message")
+    fmt.println("[3] Brute Force Decrypt")
+    fmt.println("[4] Quit ('q')")
 }
 
 
@@ -47,6 +48,8 @@ is_input_valid :: proc(input: string) -> bool
 	case "1":
 	    fallthrough
 	case "2":
+	    fallthrough
+	case "3":
 	    return true
 	case:
 	    return false
@@ -54,7 +57,7 @@ is_input_valid :: proc(input: string) -> bool
 }
 
 
-get_text :: proc() -> (string, i8)
+get_text :: proc(with_shift: bool) -> (string, i8)
 {
     // Declare variables
     txt: string
@@ -72,6 +75,15 @@ get_text :: proc() -> (string, i8)
 	{
 	    continue
 	}
+
+	/*
+           Added the !with_shift check for flexibility.
+           Now the proc can be used either for getting text to decrypt
+           or brute forcing an encrypted text, which doesn't need the user
+           to give a shift value
+	*/
+	if !with_shift {return txt, 0}
+
 
 	shift_str, ok = get_user_input("Enter shift value") 
 

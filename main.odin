@@ -38,13 +38,20 @@ main :: proc()
     switch input
     {
 	case "1":
-	    txt, shift := get_text()
+	    txt, shift := get_text(true)
 	    encrypted_txt := encrypt(txt, shift)
 	    fmt.printfln("Encrypted Text: %s", encrypted_txt)
 
 	case "2":
-	    txt, shift := get_text()
+	    txt, shift := get_text(true)
 	    encrypted_txt := encrypt(txt, -shift)
 	    fmt.printfln("Decrypted Text: %s", encrypted_txt)
+
+	case "3":
+	    txt, _ := get_text(false)
+	    for i in 1..=25
+	    {
+		fmt.printfln("\nEncrypted Text: %s\nDecrypted Text: %s\nShift Value: %d\n", txt, encrypt(txt, i8(-i)), i)
+	    }
     }
 }
