@@ -6,6 +6,4 @@ A program that encrypts and decrypts messages using the Caesar cipher, one of th
 
 - Encrypt a message
 - Decrypt a message
-- Encrypt the texts in a file
-- Decrypt the texts in a file
 - Brute Force Decrypt
